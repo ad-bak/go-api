@@ -1,0 +1,45 @@
+# Binaries and object files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.o
+*.a
+*.out
+*.test
+
+# Folders to ignore
+/vendor/
+/node_modules/
+
+# Log and data files
+*.log
+*.csv
+*.dat
+*.pem
+
+# Configuration files with sensitive information
+*.env
+*.yaml
+*.yml
+*.json
+
+# IDE and editor folders
+.vscode/
+.idea/
+*.swp
+*~
+
+# Operating system generated files
+.DS_Store
+Thumbs.db
+
+# Dependency directories (remove this if you check in vendor)
+vendor/
+
+# Test binary, build with go test -c
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
