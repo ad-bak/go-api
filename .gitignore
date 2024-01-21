@@ -2,6 +2,9 @@
 tmp
 
 
+#db
+api.db
+
 
 # Binaries and object files
 *.exe
