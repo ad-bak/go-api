@@ -93,8 +93,27 @@ func updateEvent(ctx *gin.Context) {
 
 }
 
-func returner(ctx *gin.Context) {
-	var content any
-	ctx.ShouldBindJSON(&content)
-	ctx.JSON(http.StatusOK, content)
+func deleteEventById(ctx *gin.Context) {
+	eventId, err := strconv.ParseInt(ctx.Param("id"), 10, 64)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "Could not fetch event."})
+		return
+	}
+
+	event, err := models.GetEventById(eventId)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Could not fetch event."})
+		return
+	}
+
+	err = event.Delete()
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": "Could not delete event."})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"message": "Event deleted successfully!"})
+
 }
