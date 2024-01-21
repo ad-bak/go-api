@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"example.com/books/models"
+	"example.com/books/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -40,5 +41,12 @@ func login(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{"message": "Login successful!"})
+	token, err := utils.GenerateToken(user.Email, user.ID)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"message": "Login successful!", "token": token})
 }
